@@ -12,8 +12,8 @@ public class SharedQueue {
     private  final int capacity = 5;
 
     private  final ReentrantLock lock = new ReentrantLock();
-    private final Condition notFull = lock.newCondition();
-    private final Condition notEmpty = lock.newCondition();
+    private final Condition full = lock.newCondition();
+    private final Condition empty = lock.newCondition();
 
     public void produce(int value) throws InterruptedException {
         lock.lock();    // thread acquires the lock
@@ -22,11 +22,11 @@ public class SharedQueue {
             // while the queue is full, wait.
             while (queue.size() == capacity) {
                 System.out.println("Queue is full. Producer is waiting...");
-                notFull.await();    // wait until the queue is not full
+                full.await();    // wait until the queue is not full
             }
             queue.add(value);   // add an item to the queue
             System.out.println("Produced: " + value);
-            notEmpty.signal();      // Notify the Consumer that the queue is not empty
+            empty.signal();      // Notify the Consumer that the queue is not empty
 
         } finally {
             lock.unlock();      // thread lock is released
@@ -40,11 +40,11 @@ public class SharedQueue {
             // while the queue is empty, wait.
             while (queue.isEmpty()) {
                 System.out.println("Queue is empty. Consumer is waiting...");
-                notEmpty.await();   // wait until the queue is not empty
+                empty.await();   // wait until the queue is not empty
             }
             int value = queue.poll();   // remove an item from the queue
             System.out.println("Consumed: " + value);
-            notFull.signal();       // Notify the Producer that the queue is not full
+            full.signal();       // Notify the Producer that the queue is not full
 
         } finally {
             lock.unlock();      // thread lock is released

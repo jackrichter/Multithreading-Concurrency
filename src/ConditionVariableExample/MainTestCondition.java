@@ -1,6 +1,6 @@
 package ConditionVariableExample;
 
-public class MainTest {
+public class MainTestCondition {
 
     public static void main(String[] args) throws InterruptedException {
 
