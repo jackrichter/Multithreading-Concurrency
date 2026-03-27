@@ -8,12 +8,16 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
- * To add junit-jupiter jar:
+ * To add junit-jupiter capabilities:
  * File->Project Structure->Modules->Dependencies->+>JARs or Directories,
- * Navigate to C:\Users\Acer\.m2\repository\org\junit\jupiter\junit-jupiter\5.6.2
- * Choose the jar file and click OK
+ * Navigate to C:\Users\Acer\.m2\repository\org\junit\jupiter\junit-jupiter-api\6.0.3
+ * Add JAR file junit-jupiter-api-6.0.3
+ * Navigate to C:\Users\Acer\.m2\repository\org\junit\platform\junit-platform-engine\6.0.3
+ * Add JAR file junit-platform-engine-6.0.3
+ * Navigate to C:\Users\Acer\.m2\repository\org\junit\platform\junit-platform-commons\6.0.3
+ * Add JAR file junit-platform-commons-6.0.3
  */
-public class ThreadSafeCounterTest {
+public class ThreadSafeCounterUnitTest {
 
     @Test
     public void testCounterWithMultipleThreads() throws InterruptedException {
